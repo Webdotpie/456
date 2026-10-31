@@ -1,0 +1,6 @@
+{
+  "name": "Recharge Form Portal",
+  "description": "Secure online recharge form and customer portal with responsive layout and status verification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
