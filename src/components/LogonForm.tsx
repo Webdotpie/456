@@ -94,15 +94,15 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
   ];
 
   return (
-    <div className="w-full">
+    <div style={{ width: '100%' }}>
       {/* ============================================================== */}
-      {/* MOBILE LAYOUT (Identical to WhatsApp Attachment Screenshots)    */}
+      {/* MOBILE LAYOUT (Pure CSS, exact match to WhatsApp attachments)   */}
       {/* ============================================================== */}
-      <div className="md:hidden w-full px-5 py-6 font-sans">
+      <div className="rf-mobile-form-container">
         <form onSubmit={handleSubmit} noValidate>
           {/* User ID Field */}
-          <div className="space-y-2">
-            <label htmlFor="mobile-userId" className="block text-[17px] text-slate-800 font-normal">
+          <div>
+            <label htmlFor="mobile-userId" className="rf-mobile-label">
               User ID
             </label>
             <input
@@ -117,27 +117,24 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
                   setErrors((prev) => ({ ...prev, userId: undefined }));
                 }
               }}
-              className={`w-full bg-white text-slate-900 px-3.5 h-[52px] text-base border ${
-                errors.userId ? 'border-red-600' : 'border-slate-700'
-              } rounded-none focus:outline-2 focus:outline-slate-950`}
+              className="rf-mobile-input"
+              style={{ borderColor: errors.userId ? '#dc2626' : '#334155' }}
             />
             {errors.userId && (
-              <p className="text-xs font-semibold text-red-700 flex items-center gap-1.5 mt-1">
-                <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+              <p className="rf-error-text" style={{ marginTop: '-12px', marginBottom: '14px' }}>
                 {errors.userId}
               </p>
             )}
           </div>
 
           {/* Password Field */}
-          <div className="space-y-2 mt-5">
-            <label htmlFor="mobile-password" className="block text-[17px] text-slate-800 font-normal">
+          <div>
+            <label htmlFor="mobile-password" className="rf-mobile-label">
               Password
             </label>
             <div
-              className={`w-full bg-white h-[52px] border ${
-                errors.password ? 'border-red-600' : 'border-slate-700'
-              } flex items-center pr-4`}
+              className="rf-mobile-password-box"
+              style={{ borderColor: errors.password ? '#dc2626' : '#334155' }}
             >
               <input
                 id="mobile-password"
@@ -151,113 +148,112 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
                     setErrors((prev) => ({ ...prev, password: undefined }));
                   }
                 }}
-                className="flex-1 h-full px-3.5 text-base border-none outline-none text-slate-900 bg-transparent"
+                className="rf-mobile-password-input"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="text-[#006a4e] hover:text-[#004e38] font-semibold text-base underline decoration-1 underline-offset-2 cursor-pointer select-none"
+                className="rf-mobile-show-link"
               >
                 {showPassword ? 'Hide' : 'Show'}
               </button>
             </div>
             {errors.password && (
-              <p className="text-xs font-semibold text-red-700 flex items-center gap-1.5 mt-1">
-                <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+              <p className="rf-error-text" style={{ marginTop: '-16px', marginBottom: '14px' }}>
                 {errors.password}
               </p>
             )}
           </div>
 
-          {/* Remember my User ID big green square checkbox */}
-          <div className="flex items-center gap-3.5 mt-6">
+          {/* Remember my User ID Square Checkbox */}
+          <div className="rf-mobile-checkbox-row">
             <button
               type="button"
               onClick={() => setRememberMe((prev) => !prev)}
-              className={`w-8 h-8 rounded-none border-2 border-[#006a4e] flex items-center justify-center transition-colors cursor-pointer ${
-                rememberMe ? 'bg-[#006a4e] text-white' : 'bg-white'
-              }`}
+              className={`rf-mobile-square-checkbox ${rememberMe ? 'checked' : ''}`}
               aria-label="Remember my User ID checkbox"
             >
-              {rememberMe && <Check className="w-6 h-6 stroke-[3]" />}
+              {rememberMe && <Check style={{ width: '22px', height: '22px', strokeWidth: 3 }} />}
             </button>
             <span
               onClick={() => setRememberMe((prev) => !prev)}
-              className="text-[17px] text-slate-800 font-normal cursor-pointer select-none"
+              className="rf-mobile-checkbox-text"
             >
               Remember my User ID
             </span>
           </div>
 
-          {/* Continue Button (Full Width Green) */}
-          <div className="mt-7">
+          {/* Continue Button */}
+          <div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#006a4e] active:bg-[#00543e] text-white text-[17px] font-medium py-3 rounded-none shadow-none text-center cursor-pointer flex items-center justify-center gap-2"
+              className="rf-mobile-continue-btn"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Logging on...</span>
-                </>
-              ) : (
-                'Continue'
-              )}
+              {isSubmitting ? 'Logging on...' : 'Continue'}
             </button>
           </div>
 
-          {/* Forgotten your logon details? link */}
-          <div className="mt-5">
+          {/* Forgotten details link */}
+          <div>
             <button
               type="button"
               onClick={() => onLinkClick('Forgotten your logon details?')}
-              className="text-[#006a4e] underline decoration-1 underline-offset-2 text-base font-medium cursor-pointer"
+              className="rf-mobile-forgot-link"
             >
               Forgotten your logon details?
             </button>
           </div>
 
-          {/* Quick Demo Helper */}
-          <div className="mt-3 text-right">
+          {/* Auto fill test credentials */}
+          <div style={{ textAlign: 'right', marginTop: '12px' }}>
             <button
               type="button"
               onClick={handleFillDemo}
-              className="text-xs text-slate-400 hover:text-[#006a4e] underline cursor-pointer"
+              style={{ fontSize: '12px', color: '#64748b', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               Auto-fill demo credentials
             </button>
           </div>
         </form>
 
-        {/* Mobile Navigation List with chevrons (as seen in attachments) */}
-        <div className="mt-10 border-t border-slate-200">
+        {/* Mobile Navigation List with chevrons */}
+        <div className="rf-mobile-nav-list">
           {mobileNavLinks.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => onLinkClick(item.title)}
-              className="w-full py-4 border-b border-slate-200 flex items-center justify-between text-left group cursor-pointer"
+              className="rf-mobile-nav-item"
             >
-              <span className="text-[#006a4e] font-medium text-[16px] group-hover:underline">
-                {item.title}
-              </span>
-              <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 flex-shrink-0" />
+              <span>{item.title}</span>
+              <ChevronRight style={{ width: '20px', height: '20px', color: '#94a3b8' }} />
             </button>
           ))}
         </div>
 
         {/* Mobile Protection Seal at the bottom */}
-        <div className="mt-8 py-4 flex items-center gap-4">
-          <div className="flex-shrink-0 w-14 h-14 border border-emerald-600/30 rounded-full flex flex-col items-center justify-center text-[#006a4e]">
-            <span className="text-xs font-black italic tracking-tighter">SECURE</span>
-            <span className="text-[9px] font-bold uppercase tracking-widest mt-[-2px]">Shield</span>
+        <div className="rf-mobile-protect-row">
+          <div style={{
+            width: '54px',
+            height: '54px',
+            border: '1px solid rgba(5, 150, 105, 0.4)',
+            borderRadius: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#006a4e',
+            flexShrink: 0
+          }}>
+            <span style={{ fontSize: '11px', fontWeight: '900', fontStyle: 'italic' }}>SECURE</span>
+            <span style={{ fontSize: '8px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Shield</span>
           </div>
-          <div className="text-xs text-slate-700 leading-snug">
-            <p className="font-bold text-slate-900 text-sm">
+          <div>
+            <p style={{ fontWeight: '700', color: '#0f172a', fontSize: '14px', lineHeight: 1.3 }}>
               Your account is protected by 256-bit security.
             </p>
-            <p className="text-slate-500 text-xs mt-0.5">
+            <p style={{ color: '#64748b', fontSize: '12px', marginTop: '2px' }}>
               Secure end-to-end encrypted connection.
             </p>
           </div>
@@ -265,34 +261,34 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
       </div>
 
       {/* ============================================================== */}
-      {/* DESKTOP LAYOUT (Preserves Desktop Presentation)                */}
+      {/* DESKTOP LAYOUT (Pure CSS)                                      */}
       {/* ============================================================== */}
-      <div className="hidden md:block w-full">
+      <div className="rf-desktop-only">
         {/* Page Title */}
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+        <h1 className="rf-page-title">
           Welcome to Rechard Form
         </h1>
 
         {/* Subheading / registration note */}
-        <p className="mt-3 text-sm text-slate-700">
+        <p className="rf-page-subtitle">
           If you don&apos;t already use Rechard Form, it&apos;s simple to{' '}
           <button
             type="button"
             onClick={() => onLinkClick('Register online')}
-            className="text-[#006a4e] hover:underline underline decoration-1 underline-offset-2 cursor-pointer font-medium"
+            className="rf-link-green"
           >
             register online.
           </button>
         </p>
 
         {/* Main Logon Form */}
-        <form onSubmit={handleSubmit} className="mt-6 space-y-6" noValidate>
+        <form onSubmit={handleSubmit} className="rf-form" noValidate>
           {/* User ID Field */}
-          <div className="space-y-2">
-            <label htmlFor="desktop-userId" className="block text-sm font-bold text-slate-900">
+          <div className="rf-form-group">
+            <label htmlFor="desktop-userId" className="rf-form-label">
               User ID:
             </label>
-            <div className="max-w-md">
+            <div>
               <input
                 id="desktop-userId"
                 name="userId"
@@ -305,27 +301,23 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
                     setErrors((prev) => ({ ...prev, userId: undefined }));
                   }
                 }}
-                className={`w-full sm:max-w-xs bg-white text-slate-900 px-3 py-2 text-sm border ${
-                  errors.userId ? 'border-red-600 ring-1 ring-red-600' : 'border-slate-400'
-                } rounded-none focus:outline-2 focus:outline-slate-950 focus:border-slate-950`}
-                placeholder=""
-                aria-describedby={errors.userId ? 'userId-error' : undefined}
+                className="rf-input-text"
+                style={{ borderColor: errors.userId ? '#dc2626' : '#94a3b8' }}
               />
             </div>
             {errors.userId && (
-              <p id="userId-error" className="mt-1 text-xs font-semibold text-red-700 flex items-center gap-1.5">
-                <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+              <p className="rf-error-text">
                 {errors.userId}
               </p>
             )}
           </div>
 
           {/* Password Field */}
-          <div className="space-y-2">
-            <label htmlFor="desktop-password" className="block text-sm font-bold text-slate-900">
+          <div className="rf-form-group">
+            <label htmlFor="desktop-password" className="rf-form-label">
               Password:
             </label>
-            <div className="max-w-md flex items-stretch">
+            <div className="rf-password-wrapper">
               <input
                 id="desktop-password"
                 name="password"
@@ -338,88 +330,83 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
                     setErrors((prev) => ({ ...prev, password: undefined }));
                   }
                 }}
-                className={`w-full sm:max-w-xs bg-white text-slate-900 px-3 py-2 text-sm border ${
-                  errors.password ? 'border-red-600 ring-1 ring-red-600' : 'border-slate-400'
-                } rounded-none border-r-0 focus:outline-2 focus:outline-slate-950 focus:border-slate-950`}
-                placeholder=""
-                aria-describedby={errors.password ? 'password-error' : undefined}
+                className="rf-input-password"
+                style={{ borderColor: errors.password ? '#dc2626' : '#94a3b8' }}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="px-4 py-2 border border-slate-400 bg-white hover:bg-slate-100 text-slate-800 text-sm font-medium transition-colors cursor-pointer flex items-center justify-center min-w-[70px] select-none"
-                title={showPassword ? 'Hide password' : 'Show password'}
+                className="rf-btn-show"
               >
                 {showPassword ? (
-                  <span className="flex items-center gap-1">
-                    <EyeOff className="w-3.5 h-3.5" /> Hide
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <EyeOff style={{ width: '14px', height: '14px' }} /> Hide
                   </span>
                 ) : (
-                  <span className="flex items-center gap-1">
-                    <Eye className="w-3.5 h-3.5" /> Show
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <Eye style={{ width: '14px', height: '14px' }} /> Show
                   </span>
                 )}
               </button>
             </div>
             {errors.password && (
-              <p id="password-error" className="mt-1 text-xs font-semibold text-red-700 flex items-center gap-1.5">
-                <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+              <p className="rf-error-text">
                 {errors.password}
               </p>
             )}
           </div>
 
           {/* Remember my User ID checkbox + Info tooltip */}
-          <div className="space-y-1.5 pt-1">
-            <div className="flex items-center gap-2">
+          <div style={{ marginTop: '14px' }}>
+            <div className="rf-checkbox-row">
               <input
                 id="desktop-rememberMe"
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-5 h-5 rounded-none border border-slate-500 text-[#006a4e] focus:ring-[#006a4e] cursor-pointer"
+                className="rf-checkbox-input"
               />
-              <label htmlFor="desktop-rememberMe" className="text-sm font-medium text-slate-800 cursor-pointer select-none">
+              <label htmlFor="desktop-rememberMe" className="rf-checkbox-label">
                 Remember my User ID
               </label>
               <button
                 type="button"
                 onClick={() => setShowInfoModal(true)}
-                className="text-[#006a4e] hover:text-[#004e39] cursor-pointer p-0.5 rounded-full transition-colors"
-                aria-label="More information about Remember my User ID"
-                title="Click for information"
+                style={{ background: 'none', border: 'none', color: '#006a4e', cursor: 'pointer', padding: '2px' }}
+                aria-label="More information"
               >
-                <Info className="w-4 h-4" />
+                <Info style={{ width: '16px', height: '16px' }} />
               </button>
             </div>
-            <p className="text-xs text-slate-800 font-normal">
-              <strong className="font-semibold text-slate-900">Warning:</strong> Don&apos;t tick this box if you&apos;re using a public or shared computer
+            <p className="rf-warning-text">
+              <strong>Warning:</strong> Don&apos;t tick this box if you&apos;re using a public or shared computer
             </p>
           </div>
 
           {/* Action Row */}
-          <div className="pt-4 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="rf-form-actions">
             <div>
               <button
                 type="button"
                 onClick={() => onLinkClick('Forgotten your logon details?')}
-                className="text-[#006a4e] hover:underline cursor-pointer text-sm font-semibold text-left"
+                className="rf-link-green"
+                style={{ fontSize: '14px' }}
               >
                 Forgotten your logon details?
               </button>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto bg-[#006a4e] hover:bg-[#00543e] active:bg-[#004230] text-white font-bold px-8 py-2.5 rounded-[2px] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-75"
+                className="rf-btn-continue"
               >
                 {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    <Loader2 style={{ width: '16px', height: '16px' }} className="rf-animate-spin" />
                     <span>Logging on...</span>
-                  </>
+                  </span>
                 ) : (
                   'Continue'
                 )}
@@ -428,11 +415,11 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
           </div>
 
           {/* Demo Credentials Helper */}
-          <div className="pt-2 text-right">
+          <div style={{ textAlign: 'right', marginTop: '10px' }}>
             <button
               type="button"
               onClick={handleFillDemo}
-              className="text-xs text-slate-500 hover:text-[#006a4e] underline decoration-dotted cursor-pointer"
+              style={{ fontSize: '12px', color: '#64748b', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
             >
               Auto-fill demo credentials
             </button>
@@ -442,23 +429,24 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
 
       {/* Info Modal for "Remember my User ID" */}
       {showInfoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white max-w-md w-full p-6 shadow-xl border border-slate-300">
-            <div className="flex items-center gap-2 text-[#006a4e] font-bold text-lg mb-3">
-              <Info className="w-5 h-5 flex-shrink-0" />
+        <div className="rf-modal-overlay">
+          <div className="rf-modal-card" style={{ maxWidth: '440px', textAlign: 'left', borderColor: '#cbd5e1' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#006a4e', fontWeight: '700', fontSize: '18px', marginBottom: '12px' }}>
+              <Info style={{ width: '20px', height: '20px' }} />
               <span>Remember my User ID</span>
             </div>
-            <p className="text-sm text-slate-700 leading-relaxed">
+            <p style={{ fontSize: '14px', color: '#334155', lineHeight: 1.5 }}>
               If you check this box, we will remember your User ID on this browser so you don&apos;t have to enter it every time you log on.
             </p>
-            <p className="text-sm text-slate-700 leading-relaxed mt-2.5">
-              For security, never select this option if you are using a shared computer (such as at work, a library, or an internet cafe).
+            <p style={{ fontSize: '14px', color: '#334155', lineHeight: 1.5, marginTop: '10px' }}>
+              For security, never select this option if you are using a shared computer.
             </p>
-            <div className="mt-5 text-right">
+            <div style={{ textAlign: 'right', marginTop: '20px' }}>
               <button
                 type="button"
                 onClick={() => setShowInfoModal(false)}
-                className="bg-[#006a4e] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#00543e] transition-colors cursor-pointer"
+                className="rf-btn-continue"
+                style={{ padding: '6px 20px', fontSize: '13px' }}
               >
                 Close
               </button>

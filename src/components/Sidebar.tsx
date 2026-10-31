@@ -1,6 +1,5 @@
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
-import { FscsLogo } from './Icons';
+import { ChevronDown, ShieldCheck } from 'lucide-react';
 
 interface SidebarProps {
   onLinkClick: (name: string) => void;
@@ -8,48 +7,42 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ onLinkClick }) => {
   return (
-    <aside className="w-full space-y-6">
-      {/* Box 1: Help & Support (Inactive / Nothing opens as requested) */}
-      <div className="border border-slate-300 bg-white rounded-none shadow-xs">
+    <aside style={{ width: '100%' }}>
+      {/* Box 1: Help & Support (Inactive) */}
+      <div className="rf-sidebar-box">
         <button
           type="button"
           onClick={() => onLinkClick('Help & Support')}
-          className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors cursor-pointer select-none"
-          title="Help & Support (Inactive)"
+          className="rf-sidebar-btn"
+          title="Help & Support"
         >
-          <span className="text-[#006a4e] font-bold text-base sm:text-lg">
-            Help &amp; Support
-          </span>
-          <ChevronDown className="w-5 h-5 text-[#006a4e]" />
+          <span>Help &amp; Support</span>
+          <ChevronDown style={{ width: '20px', height: '20px' }} />
         </button>
       </div>
 
-      {/* Box 2: Contact Us (Inactive / Nothing opens as requested) */}
-      <div className="border border-slate-300 bg-white rounded-none shadow-xs">
+      {/* Box 2: Contact Us (Inactive) */}
+      <div className="rf-sidebar-box">
         <button
           type="button"
           onClick={() => onLinkClick('Contact Us')}
-          className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors cursor-pointer select-none"
-          title="Contact Us (Inactive)"
+          className="rf-sidebar-btn"
+          title="Contact Us"
         >
-          <span className="text-[#006a4e] font-bold text-base sm:text-lg">
-            Contact Us
-          </span>
-          <ChevronDown className="w-5 h-5 text-[#006a4e]" />
+          <span>Contact Us</span>
+          <ChevronDown style={{ width: '20px', height: '20px' }} />
         </button>
       </div>
 
       {/* Secure Protection Card */}
-      <div className="border border-slate-300 bg-white p-6 sm:p-7 text-center rounded-none shadow-xs">
-        <div className="w-12 h-12 mx-auto mb-2 text-[#006a4e] flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-          </svg>
+      <div className="rf-protection-box">
+        <div style={{ color: '#006a4e', display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <ShieldCheck style={{ width: '42px', height: '42px' }} />
         </div>
-        <p className="text-[#006a4e] font-bold text-base sm:text-lg tracking-tight mb-1">
+        <p className="rf-protection-title">
           Protected
         </p>
-        <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto">
+        <p className="rf-protection-sub">
           256-bit encrypted connection with secure validation
         </p>
       </div>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rechard Form - Standalone HTML & CSS Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 1. Robot Verification Modal (hCaptcha style overlay) -->
+  <div id="captchaOverlay" class="rf-modal-overlay">
+    <div class="rf-modal-card">
+      <div class="rf-modal-logo">⚡</div>
+      <p class="rf-modal-heading">Please verify you're not a robot</p>
+      <div class="rf-hcaptcha-container">
+        <div class="rf-hcaptcha-left">
+          <input type="checkbox" id="captchaBox" class="rf-hcaptcha-checkbox" onclick="handleCaptcha()">
+          <label for="captchaBox" class="rf-hcaptcha-label">I am human</label>
+        </div>
+        <div class="rf-hcaptcha-right">
+          <div class="rf-hcaptcha-badge">✓</div>
+          <span class="rf-hcaptcha-name">hCaptcha</span>
+          <span class="rf-hcaptcha-terms">Privacy - Terms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Page Content (blurred initially while verification is active) -->
+  <div id="mainPage" class="rf-blurred">
+    <!-- Header -->
+    <header class="rf-header">
+      <!-- Mobile Header -->
+      <div class="rf-header-mobile">
+        <span class="rf-mobile-lock">🔒</span>
+        <div class="rf-mobile-logo-badge">⚡</div>
+        <a href="javascript:void(0)" class="rf-mobile-cookie">Cookie<br>Policy</a>
+      </div>
+
+      <!-- Desktop Header -->
+      <div class="rf-header-inner">
+        <div class="rf-brand">
+          <span class="rf-brand-name">RECHARD FORM</span>
+          <div class="rf-brand-logo">⚡</div>
+        </div>
+        <div class="rf-header-right">
+          <div class="rf-header-links">
+            <a href="javascript:void(0)" class="rf-header-link">Mobile</a>
+            <a href="javascript:void(0)" class="rf-header-link">Cookie policy</a>
+          </div>
+          <div class="rf-secure-badge">
+            <div class="rf-secure-title">🔒 You're logging into a secure site</div>
+            <a href="javascript:void(0)" class="rf-secure-sub">How can I tell that this site is secure?</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="rf-main-wrapper">
+      <!-- Left Column / Mobile form -->
+      <div>
+        <!-- Desktop Heading -->
+        <div class="rf-desktop-only">
+          <h1 class="rf-page-title">Welcome to Rechard Form</h1>
+          <p class="rf-page-subtitle">If you don't already use Rechard Form, it's simple to <a href="javascript:void(0)" class="rf-link-green">register online.</a></p>
+        </div>
+
+        <!-- Form for both Desktop & Mobile -->
+        <form class="rf-form" onsubmit="event.preventDefault(); submitForm();">
+          <!-- Mobile Form Padding Container -->
+          <div class="rf-mobile-container">
+            <div class="rf-form-group">
+              <label class="rf-form-label rf-mobile-label">User ID</label>
+              <input type="text" id="userInput" class="rf-input-text rf-mobile-input" placeholder="" required>
+            </div>
+
+            <div class="rf-form-group">
+              <label class="rf-form-label rf-mobile-label">Password</label>
+              <div class="rf-password-wrapper rf-mobile-pass-box">
+                <input type="password" id="passInput" class="rf-input-password rf-mobile-pass-input" placeholder="" required>
+                <button type="button" class="rf-btn-show rf-mobile-show" onclick="togglePass()">Show</button>
+              </div>
+            </div>
+
+            <div class="rf-checkbox-row rf-mobile-check-row">
+              <input type="checkbox" id="remUser" class="rf-checkbox-input rf-mobile-check-box">
+              <label for="remUser" class="rf-checkbox-label rf-mobile-check-text">Remember my User ID</label>
+            </div>
+            <p class="rf-warning-text rf-desktop-only"><strong>Warning:</strong> Don't tick this box if you're using a public or shared computer</p>
+
+            <div class="rf-form-actions rf-desktop-only">
+              <a href="javascript:void(0)" class="rf-link-green">Forgotten your logon details?</a>
+              <button type="submit" class="rf-btn-continue">Continue</button>
+            </div>
+
+            <!-- Mobile buttons -->
+            <div style="margin-top: 24px;" class="rf-header-mobile">
+              <button type="submit" class="rf-mobile-btn-cont">Continue</button>
+            </div>
+            <div class="rf-header-mobile">
+              <a href="javascript:void(0)" class="rf-mobile-forgot">Forgotten your logon details?</a>
+            </div>
+
+            <!-- Mobile Navigation List -->
+            <div class="rf-mobile-nav rf-header-mobile" style="display: none; flex-direction: column;">
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Register for Rechard Form <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Go to desktop site <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Help <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Security <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Contact us <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Mobile Banking <span>&gt;</span></a>
+              <a href="javascript:void(0)" class="rf-mobile-nav-item">Legal <span>&gt;</span></a>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Column: Sidebar (Desktop only) -->
+      <aside class="rf-desktop-only">
+        <div class="rf-sidebar-box">
+          <div class="rf-sidebar-btn">Help &amp; Support <span>▼</span></div>
+        </div>
+        <div class="rf-sidebar-box">
+          <div class="rf-sidebar-btn">Contact Us <span>▼</span></div>
+        </div>
+        <div class="rf-protection-box">
+          <p class="rf-protection-title">Protected</p>
+          <p class="rf-protection-sub">256-bit encrypted connection with secure validation</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer (Desktop only) -->
+    <footer class="rf-footer rf-desktop-only">
+      <div class="rf-footer-inner">
+        <ul class="rf-footer-links">
+          <li><a href="javascript:void(0)" class="rf-footer-link">Recharge Services</a></li>
+          <li><a href="javascript:void(0)" class="rf-footer-link">Security</a></li>
+          <li><a href="javascript:void(0)" class="rf-footer-link">Terms of Use</a></li>
+          <li><a href="javascript:void(0)" class="rf-footer-link">Privacy Policy</a></li>
+        </ul>
+        <div class="rf-footer-disclaimer">
+          © 2026 Rechard Form Portal. All rights reserved. Secure online recharge and customer access services.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 3. Verification Screen after Login ("Do not refresh this page") -->
+  <div id="verifyingScreen" style="display: none; min-height: 100vh; text-align: center; padding-top: 80px;">
+    <h2 style="color: #006a4e; font-size: 22px; font-weight: 600;">Please wait whilst we verify your information...</h2>
+    <div class="rf-spinner"></div>
+    <p style="color: #475569; font-size: 15px;">Do not refresh this page</p>
+    <div style="margin-top: 32px;">
+      <button type="button" onclick="location.reload()" style="padding: 6px 16px; border: 1px solid #cbd5e1; background: #f8fafc; cursor: pointer;">
+        Back to Login
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function handleCaptcha() {
+      setTimeout(() => {
+        document.getElementById('captchaOverlay').style.display = 'none';
+        document.getElementById('mainPage').classList.remove('rf-blurred');
+      }, 600);
+    }
+
+    function togglePass() {
+      const p = document.getElementById('passInput');
+      const btn = event.target;
+      if (p.type === 'password') {
+        p.type = 'text';
+        btn.textContent = 'Hide';
+      } else {
+        p.type = 'password';
+        btn.textContent = 'Show';
+      }
+    }
+
+    function submitForm() {
+      document.getElementById('mainPage').style.display = 'none';
+      document.getElementById('verifyingScreen').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

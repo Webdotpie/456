@@ -20,10 +20,8 @@ export const VerifyingScreen: React.FC<VerifyingScreenProps> = ({
   onBackToLogin,
 }) => {
   const [dots, setDots] = useState('');
-  const [autoProceed, setAutoProceed] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(6);
 
-  // Animated ellipsis for subtle realism
+  // Animated ellipsis
   useEffect(() => {
     const interval = setInterval(() => {
       setDots((prev) => (prev.length >= 3 ? '' : prev + '.'));
@@ -31,44 +29,31 @@ export const VerifyingScreen: React.FC<VerifyingScreenProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  // Optional countdown for demo users if they want to view dashboard
-  useEffect(() => {
-    if (!autoProceed) return;
-    if (secondsLeft <= 0) {
-      onFinishVerification();
-      return;
-    }
-    const timer = setTimeout(() => {
-      setSecondsLeft((s) => s - 1);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [autoProceed, secondsLeft, onFinishVerification]);
-
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 font-sans antialiased selection:bg-[#006a4e] selection:text-white">
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#ffffff' }}>
       {/* Header */}
       <Header onLinkClick={onLinkClick} onOpenSecurityModal={onOpenSecurityModal} />
 
       {/* Main Verification Container */}
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 flex flex-col justify-between">
+      <main style={{ flex: 1, maxWidth: '800px', width: '100%', margin: '0 auto', padding: '60px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         {/* Verification Message & Animated Spinner */}
-        <div className="text-center py-6 sm:py-10">
-          <h1 className="text-xl sm:text-2xl font-semibold text-[#006a4e] tracking-tight">
+        <div style={{ textAlign: 'center', padding: '24px 0' }}>
+          <h1 style={{ fontSize: '22px', fontWeight: '600', color: '#006a4e', letterSpacing: '-0.3px' }}>
             Please wait whilst we verify your information{dots}
           </h1>
 
           {/* Animated Spinner matching the screenshot */}
-          <div className="my-8 flex justify-center items-center">
-            <div className="relative w-12 h-12 flex items-center justify-center">
+          <div style={{ margin: '32px 0', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {/* Spinning 12-blade radial spinner */}
               <svg
-                className="w-10 h-10 animate-spin text-[#006a4e]"
+                className="rf-animate-spin"
+                style={{ width: '40px', height: '40px', color: '#006a4e' }}
                 viewBox="0 0 100 100"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="Verifying information spinner"
               >
-                {/* 12 rounded spokes with graduated opacity */}
                 {[...Array(12)].map((_, i) => {
                   const angle = i * 30;
                   const opacity = Math.max(0.12, (i + 1) / 12);
@@ -90,34 +75,34 @@ export const VerifyingScreen: React.FC<VerifyingScreenProps> = ({
             </div>
           </div>
 
-          <p className="text-sm sm:text-base text-slate-700 font-normal">
+          <p style={{ fontSize: '15px', color: '#334155' }}>
             Do not refresh this page
           </p>
 
-          {/* Discreet interactive controls for testing/demo */}
-          <div className="mt-8 pt-4 flex flex-wrap items-center justify-center gap-3">
+          {/* Testing controls */}
+          <div style={{ marginTop: '36px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
             <button
               type="button"
               onClick={onBackToLogin}
-              className="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 rounded-[2px] transition-colors cursor-pointer bg-slate-50 hover:bg-slate-100"
+              style={{ fontSize: '12px', color: '#475569', display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', border: '1px solid #cbd5e1', borderRadius: '2px', backgroundColor: '#f8fafc', cursor: 'pointer' }}
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft style={{ width: '14px', height: '14px' }} />
               <span>Back to Login</span>
             </button>
 
             <button
               type="button"
               onClick={onFinishVerification}
-              className="text-xs text-[#006a4e] hover:text-[#00523d] flex items-center gap-1.5 px-3 py-1.5 border border-[#006a4e]/30 rounded-[2px] transition-colors cursor-pointer bg-emerald-50/50 hover:bg-emerald-50 font-semibold"
+              style={{ fontSize: '12px', color: '#006a4e', display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', border: '1px solid rgba(0, 106, 78, 0.4)', borderRadius: '2px', backgroundColor: '#ecfdf5', fontWeight: '600', cursor: 'pointer' }}
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
+              <CheckCircle2 style={{ width: '14px', height: '14px' }} />
               <span>Continue to Accounts Dashboard &rarr;</span>
             </button>
           </div>
         </div>
 
         {/* Promo block below divider */}
-        <div className="mt-12 sm:mt-16">
+        <div style={{ marginTop: '48px', borderTop: '1px solid #e2e8f0', paddingTop: '24px' }}>
           <MobileAppPromo onLinkClick={onLinkClick} />
         </div>
       </main>
