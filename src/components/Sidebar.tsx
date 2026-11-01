@@ -1,5 +1,4 @@
-import React from 'react';
-import { ChevronDown, ShieldCheck } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 interface SidebarProps {
   onLinkClick: (name: string) => void;
@@ -34,17 +33,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ onLinkClick }) => {
         </button>
       </div>
 
-      {/* Secure Protection Card */}
-      <div className="rf-protection-box">
-        <div style={{ color: '#006a4e', display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-          <ShieldCheck style={{ width: '42px', height: '42px' }} />
-        </div>
-        <p className="rf-protection-title">
-          Protected
-        </p>
-        <p className="rf-protection-sub">
-          256-bit encrypted connection with secure validation
-        </p>
+      {/* FSCS Protection Card matching attachment homepage_a_ei_logo_ta_thaka_dorkar_130e26cd.jpg */}
+      <div className="rf-protection-box" style={{ padding: '16px', textAlign: 'center', backgroundColor: '#ffffff' }}>
+        <img
+          src="./fscs_protected.jpg"
+          alt="FSCS Protected - FSCS is not applicable to deposits in the Channel Islands and Isle of Man"
+          style={{ width: '100%', maxWidth: '250px', height: 'auto', display: 'block', margin: '0 auto' }}
+          onError={(e) => {
+            // Fallback path if hosted at root or subfolder
+            e.currentTarget.src = '/assets/aistudio/homepage_a_ei_logo_ta_thaka_dorkar_130e26cd.jpg';
+          }}
+        />
       </div>
     </aside>
   );

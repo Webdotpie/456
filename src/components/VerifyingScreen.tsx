@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MobileAppPromo } from './MobileAppPromo';
-import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 interface VerifyingScreenProps {
   userId: string;
@@ -79,26 +78,7 @@ export const VerifyingScreen: React.FC<VerifyingScreenProps> = ({
             Do not refresh this page
           </p>
 
-          {/* Testing controls */}
-          <div style={{ marginTop: '36px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-            <button
-              type="button"
-              onClick={onBackToLogin}
-              style={{ fontSize: '12px', color: '#475569', display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', border: '1px solid #cbd5e1', borderRadius: '2px', backgroundColor: '#f8fafc', cursor: 'pointer' }}
-            >
-              <ArrowLeft style={{ width: '14px', height: '14px' }} />
-              <span>Back to Login</span>
-            </button>
 
-            <button
-              type="button"
-              onClick={onFinishVerification}
-              style={{ fontSize: '12px', color: '#006a4e', display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 14px', border: '1px solid rgba(0, 106, 78, 0.4)', borderRadius: '2px', backgroundColor: '#ecfdf5', fontWeight: '600', cursor: 'pointer' }}
-            >
-              <CheckCircle2 style={{ width: '14px', height: '14px' }} />
-              <span>Continue to Accounts Dashboard &rarr;</span>
-            </button>
-          </div>
         </div>
 
         {/* Promo block below divider */}

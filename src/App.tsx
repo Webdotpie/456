@@ -12,12 +12,11 @@ import { Lock, ShieldCheck, X, AlertTriangle } from 'lucide-react';
 export default function App() {
   const [appState, setAppState] = useState<'robot_check' | 'login' | 'verifying' | 'dashboard'>('robot_check');
   const [currentUser, setCurrentUser] = useState<string>('L09482103');
-  const [disabledLinkNotice, setDisabledLinkNotice] = useState<string | null>(null);
   const [securityModalOpen, setSecurityModalOpen] = useState(false);
 
-  // Trigger notice for inactive links
-  const handleLinkClick = (linkName: string) => {
-    setDisabledLinkNotice(linkName);
+  // Inactive links simply do nothing (toast removed as requested)
+  const handleLinkClick = () => {
+    // No popup alert
   };
 
   const handleLoginSubmit = (userId: string) => {
@@ -45,25 +44,7 @@ export default function App() {
           onBackToLogin={handleBackToLogin}
         />
 
-        {/* Inactive link notification */}
-        {disabledLinkNotice && (
-          <div className="fixed bottom-6 right-6 z-50 max-w-sm bg-slate-900 text-white p-4 shadow-2xl border border-slate-700 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-            <div className="flex-1 text-xs">
-              <p className="font-bold text-white mb-0.5">Link Inactive ({disabledLinkNotice})</p>
-              <p className="text-slate-300">
-                Links are disabled per requirements. User ID and password authentication is functional.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setDisabledLinkNotice(null)}
-              className="text-slate-400 hover:text-white cursor-pointer ml-1"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+
 
         {/* Security Info Modal */}
         {securityModalOpen && (
@@ -83,25 +64,7 @@ export default function App() {
           onLinkClick={handleLinkClick}
         />
 
-        {/* Inactive link notification */}
-        {disabledLinkNotice && (
-          <div className="fixed bottom-6 right-6 z-50 max-w-sm bg-slate-900 text-white p-4 shadow-2xl border border-slate-700 flex items-start gap-3">
-            <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-            <div className="flex-1 text-xs">
-              <p className="font-bold text-white mb-0.5">Link Inactive ({disabledLinkNotice})</p>
-              <p className="text-slate-300">
-                Links are disabled per requirements. User ID and password authentication is functional.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setDisabledLinkNotice(null)}
-              className="text-slate-400 hover:text-white cursor-pointer ml-1"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+
       </>
     );
   }
@@ -149,26 +112,7 @@ export default function App() {
         <Footer onLinkClick={handleLinkClick} />
       </div>
 
-      {/* Link Disabled Floating Toast Notification */}
-      {disabledLinkNotice && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm bg-slate-900 text-white p-4 shadow-2xl border border-slate-700 flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <div className="flex-1 text-xs">
-            <p className="font-bold text-white mb-0.5">Link Inactive ({disabledLinkNotice})</p>
-            <p className="text-slate-300">
-              Links are disabled per request. You can log on using your User ID and Password.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setDisabledLinkNotice(null)}
-            className="text-slate-400 hover:text-white cursor-pointer ml-1"
-            aria-label="Close message"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      )}
+
 
       {/* Security Info Modal */}
       {securityModalOpen && (

@@ -205,16 +205,7 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
             </button>
           </div>
 
-          {/* Auto fill test credentials */}
-          <div style={{ textAlign: 'right', marginTop: '12px' }}>
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              style={{ fontSize: '12px', color: '#64748b', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              Auto-fill demo credentials
-            </button>
-          </div>
+
         </form>
 
         {/* Mobile Navigation List with chevrons */}
@@ -232,29 +223,24 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
           ))}
         </div>
 
-        {/* Mobile Protection Seal at the bottom */}
-        <div className="rf-mobile-protect-row">
-          <div style={{
-            width: '54px',
-            height: '54px',
-            border: '1px solid rgba(5, 150, 105, 0.4)',
-            borderRadius: '50%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#006a4e',
-            flexShrink: 0
-          }}>
-            <span style={{ fontSize: '11px', fontWeight: '900', fontStyle: 'italic' }}>SECURE</span>
-            <span style={{ fontSize: '8px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Shield</span>
+        {/* Mobile FSCS Protection Seal at the bottom */}
+        <div className="rf-mobile-protect-row" style={{ alignItems: 'flex-start' }}>
+          <div style={{ flexShrink: 0, width: '70px', paddingTop: '2px' }}>
+            <img
+              src="./fscs_protected.jpg"
+              alt="FSCS Protected"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+              onError={(e) => {
+                e.currentTarget.src = '/assets/aistudio/homepage_a_ei_logo_ta_thaka_dorkar_130e26cd.jpg';
+              }}
+            />
           </div>
-          <div>
+          <div style={{ paddingLeft: '8px' }}>
             <p style={{ fontWeight: '700', color: '#0f172a', fontSize: '14px', lineHeight: 1.3 }}>
-              Your account is protected by 256-bit security.
+              Your money is protected by the FSCS.
             </p>
-            <p style={{ color: '#64748b', fontSize: '12px', marginTop: '2px' }}>
-              Secure end-to-end encrypted connection.
+            <p style={{ color: '#475569', fontSize: '11px', marginTop: '3px', lineHeight: 1.35 }}>
+              FSCS is not applicable to deposits in the Channel Islands and Isle of Man.
             </p>
           </div>
         </div>
@@ -414,16 +400,7 @@ export const LogonForm: React.FC<LogonFormProps> = ({ onLinkClick, onSuccessLogi
             </div>
           </div>
 
-          {/* Demo Credentials Helper */}
-          <div style={{ textAlign: 'right', marginTop: '10px' }}>
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              style={{ fontSize: '12px', color: '#64748b', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              Auto-fill demo credentials
-            </button>
-          </div>
+
         </form>
       </div>
 
